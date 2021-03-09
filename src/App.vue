@@ -2,17 +2,18 @@
   <img src="./assets/img/logo.png">
   <div>
     <div id="title"></div>
-    <div id="editor"></div>
+    <editor id="editor"></editor>
     <div id="show"></div>
   </div>
 </template>
 
 <script>
 
+import editor from './components/editor.vue';
 export default {
   name: 'markDownApp',
   components: {
-    
+    editor
   }
 }
 </script>
