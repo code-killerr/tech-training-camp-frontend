@@ -43,6 +43,7 @@ export default defineComponent({
   background-color: black;
   color: #74afeb;
   font-size: 20px;
+  box-sizing:border-box
 }
 </style>
 
