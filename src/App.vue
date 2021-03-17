@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <div id="title" class="title_area"></div>
+    <div id="title" class="title_area">
+      <titlebar @click_button="get_button"></titlebar>
+    </div>
     <!-- <editor id="editor" ></editor> -->
     <div class="main_container">
       <div id="editor" class="editor_area">
-        <editor @my-emit="parentEmit" ></editor>
+        <editor :msg="title_msg" @get_data="send_data" ></editor>
       </div>
       
       <div id="show" class="show_area">
-        <div v-text="a" class="show_style"></div>
+        <div v-html="translateMd" class="show_style"></div>
       </div>
     
     </div>
@@ -16,24 +18,50 @@
 </template>
 
 <script>
-import {ref, defineComponent} from 'vue'
+import marked from './assets/js/translate.js'
+import {computed, ref, defineComponent} from 'vue'
 import editor from './components/editor.vue';
+import titlebar from './components/title.vue';
 export default defineComponent({
   name: 'markDownApp',
   components: {
-    editor
+    editor,
+    titlebar
   },
   setup() {
-    let a = ref("")
-    function parentEmit(val){
+    var text = ref("")
+    var title_msg = ref("")
+    function send_data(val){
         // alert(val)
-        a.value = val
+        text.value = val
     }
+    function get_button(val){
+      console.log(val)
+      title_msg.value = val
+    }
+    var renderer = new marked.Renderer();
+    marked.setOptions({
+        renderer: renderer,
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    });
+
+    const translateMd = computed(()=>{
+      return marked(text.value)
+    })
     return{
-        parentEmit,
-        a
+        send_data,
+        text,
+        translateMd,
+        get_button,
+        title_msg
     }
-  },
+  }
 });
 </script>
 
@@ -49,7 +77,8 @@ export default defineComponent({
 }
 .main_container{
   display:flex;
-  flex-grow: 10;
+  flex-grow: 20;
+  flex-wrap: nowrap
 }
 .container{
   display:flex;
@@ -62,8 +91,8 @@ export default defineComponent({
   background-color: pink;
 }
 .editor_area {
+  width: 50%;
   height:100%;
-  float: left;
   flex-grow: 1;
 }
 .editor_area div{
@@ -71,10 +100,10 @@ export default defineComponent({
   height: 100%;
 }
 .show_area{
+  width: 50%;
+  padding:10px;
   height:100%;
   flex-grow: 1;
-  /* height: 500px; */
-  float: left;
 
 }
 .show_style{
