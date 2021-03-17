@@ -20,16 +20,18 @@ npm run build
 npm run lint
 ```
 ## 开发状态
-1. 总体结构分为title,show(先写在App里,别打了别打了,后面肯定要移出来的)和editor,分别负责快捷键，展示以及编写，css布局采用了flex
+1. 框架使用vue3采用vue-cli搭建
+
+2. 总体结构分为title,show(先写在App里,别打了别打了,后面肯定要移出来的)和editor,分别负责快捷键，展示以及编写，css布局采用了flex
 
 
-2. 转换内核采用了外部的translate.js，编译看了个寂寞。
+3. 转换内核采用了外部的translate.js，编译看了个寂寞。
 
 
-3. 具有快捷键添加常用md语法功能，正在完善ing
+4. 具有快捷键添加常用md语法功能，正在完善ing
 
 
-4. 尝试线上部署Ing.......
+5. 尝试线上部署Ing.......
 
 
 ## o(╥﹏╥)o
