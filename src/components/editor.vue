@@ -13,10 +13,11 @@ export default defineComponent({
         msg:Object
     },
     setup(props,{emit}){ //分解context对象取出emit
-        const editor_text = ref("this is a test")
+        const editor_text = ref("## this is a test")
         function childEmit(){
             emit('get_data',editor_text.value)
         }
+        childEmit()
         return{
             childEmit,
             editor_text
