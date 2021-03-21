@@ -6,11 +6,12 @@
     <!-- <editor id="editor" ></editor> -->
     <div class="main_container">
       <div id="editor" class="editor_area">
-        <editor :msg="title_msg" @get_data="send_data" ></editor>
+        <editor :msg="title_msg" @get_data="send_data" @finish_msg="editor_finish"></editor>
       </div>
       
       <div id="show" class="show_area">
-        <div v-html="translateMd" class="show_style"></div>
+        <show :text="translateMd"></show>
+        <!-- <div v-html="translateMd" class="show_style"></div> -->
       </div>
     
     </div>
@@ -22,22 +23,31 @@ import marked from './assets/js/translate.js'
 import {computed, ref, defineComponent} from 'vue'
 import editor from './components/editor.vue';
 import titlebar from './components/title.vue';
+import show from './components/show.vue'
 export default defineComponent({
   name: 'markDownApp',
   components: {
     editor,
-    titlebar
+    titlebar,
+    show
   },
   setup() {
     var text = ref("")
-    var title_msg = ref("")
+    var title_msg = ref([])
     function send_data(val){
         // alert(val)
         text.value = val
     }
+
     function get_button(val){
-      console.log(val)
+      // console.log(val)
       title_msg.value = val
+    }
+
+    function editor_finish(val){
+      title_msg.value = {}
+      // console.log("清空msg")
+      // console.log(val)
     }
     var renderer = new marked.Renderer();
     marked.setOptions({
@@ -59,7 +69,8 @@ export default defineComponent({
         text,
         translateMd,
         get_button,
-        title_msg
+        title_msg,
+        editor_finish
     }
   }
 });
@@ -77,8 +88,9 @@ export default defineComponent({
 }
 .main_container{
   display:flex;
-  flex-grow: 20;
-  flex-wrap: nowrap
+  height: 100%;
+  flex-wrap: nowrap;
+  flex-grow: 1;
 }
 .container{
   display:flex;
@@ -86,9 +98,9 @@ export default defineComponent({
   flex-direction:column;
 }
 .title_area{
-  flex-grow: 1;
+  height:60px;
   width: 100%;
-  background-color: pink;
+  background-color:#efefef;
 }
 .editor_area {
   width: 50%;
@@ -106,14 +118,12 @@ export default defineComponent({
   flex-grow: 1;
 
 }
-.show_style{
-  width:100%;
-  height: 100%;
-}
+
 body{
   height: 100%;
 }
 html{
   height: 100%;
 }
+
 </style>
