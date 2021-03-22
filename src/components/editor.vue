@@ -6,12 +6,15 @@
 
 <script>
 import {ref, defineComponent} from 'vue'
-
+import pop_window from './popWindow.vue';
 export default defineComponent({
     name: "editor",
     props: {
         msg:Object
     },
+    components: {
+        pop_window
+  },
     setup(props,{emit}){ //分解context对象取出emit
         const editor_text = ref("## this is a test")
         function sendTextData(){
@@ -37,22 +40,32 @@ export default defineComponent({
                 return
             }
             // 获取光标位置
-            let 光标Position = this.$refs.editor_tag.selectionStart
-            // console.log("光标位于"+光标Position)
+            let 光标PositionStart = this.$refs.editor_tag.selectionStart
+            let 光标PositionEnd = this.$refs.editor_tag.selectionEnd
+            // console.log("光标位于"+光标PositionStart)
             // console.log(this.msg.tagid)
             // 根据光标位置进行截断数据
-            let startText = this.editor_text.slice(0,光标Position)
-            let endText = this.editor_text.slice(光标Position)
+            let startText = this.editor_text.slice(0,光标PositionStart)
+            let middleText = this.editor_text.slice(光标PositionStart, 光标PositionEnd)
+            let endText = this.editor_text.slice(光标PositionEnd)
             let textareaTag = this.$refs.editor_tag
-            // console.log(this.msg)
-            if(0 <= this.msg.tagid && this.msg.tagid < 6){
+            console.log(this.msg)
+            if((0 <= this.msg.tagid && this.msg.tagid < 6) || (11 <= this.msg.tagid && this.msg.tagid < 14)){
                 let 回车位置 = startText.lastIndexOf('\n')+1
                 this.editor_text = this.editor_text.slice(0,回车位置) + this.msg.start_value + this.msg.end_value+this.editor_text.slice(回车位置)
-            }else{
-                console.log(startText + this.msg.start_value+this.msg.end_value + endText)
-                this.editor_text = startText + this.msg.start_value+this.msg.end_value + endText
             }
-            let index = 光标Position + this.msg.start_value.length
+            // else if(this.msg.tagid === 14 || this.msg.tagid === 15){
+            //     // let floatWindow = document.createElement("div")
+            //     // floatWindow.setAttribute("class","float_window")
+            //     // document.body.appendChild(floatWindow)
+            //     let floatWindow = document.createElement("pop_window")
+            //     document.body.appendChild(floatWindow)
+            // }
+            else{
+                console.log(startText + this.msg.start_value+middleText+this.msg.end_value + endText)
+                this.editor_text = startText + this.msg.start_value+middleText+this.msg.end_value + endText
+            }
+            let index = 光标PositionStart + this.msg.start_value.length
             // console.log("index位于"+index)
             textareaTag.focus()
             this.$nextTick(() => {

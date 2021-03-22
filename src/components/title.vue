@@ -17,7 +17,7 @@ export default defineComponent({
             {start_value:'#### ',end_value:'',name:"H4"},
             {start_value:'##### ',end_value:'',name:"H5"},
             {start_value:'###### ',end_value:'',name:"H6"},
-            {start_value:'\n```\n',end_value:'\n```',name:"CODE"},
+            {start_value:'\n```\n',end_value:'\n```\n',name:"CODE"},
             {start_value:'`',end_value:'`',name:"code"},
             {start_value:'~~',end_value:'~~',name:"S"},
             {start_value:'*',end_value:'*',name:"I"},
