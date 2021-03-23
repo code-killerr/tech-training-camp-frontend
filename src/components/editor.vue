@@ -91,7 +91,7 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: rgb(37, 36, 36);
   color: #74afeb;
   font-size: 20px;
   padding: 10px;
