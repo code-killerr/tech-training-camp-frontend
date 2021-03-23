@@ -53,7 +53,7 @@ export default defineComponent({
 
 .title_style{
     display:flex;
-    width: 100%;
+    width: 50%;
     height: 100%;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -62,6 +62,7 @@ export default defineComponent({
     font-size: 20px;
     padding: 10px;
     box-sizing:border-box;
+
 }
 .button_style{
     flex-grow: 1;
@@ -75,10 +76,11 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
     text-align: center;
+    
 }
 .button_style:hover{
-    box-shadow:0 0 10px 3px lightblue;
-    border: 1px solid lightblue;
+    box-shadow:0 0 5px 3px lightblue;
+    /* border: 1px solid lightblue; */
 }
 .button_style:active{
     /* box-shadow:0 0 -10px -5px lightblue; */

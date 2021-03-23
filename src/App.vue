@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+  <div class="big_title"><span style="width:100%;font-size:30px"><b>Markdown Editor</b></span></div>
     <div id="title" class="title_area">
       <titlebar @click_button="get_button"></titlebar>
     </div>
@@ -100,7 +101,8 @@ export default defineComponent({
 .title_area{
   height:60px;
   width: 100%;
-  background-color:#efefef;
+  box-shadow:0px 10px 10px lightblue;
+  /* background-color:#efefef; */
 }
 .editor_area {
   width: 50%;
@@ -125,5 +127,12 @@ body{
 html{
   height: 100%;
 }
-
+.big_title{
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid lightblue;
+  display:flex;
+  align-items: center;
+}
 </style>
